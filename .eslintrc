@@ -1,0 +1,28 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:vue/vue3-essential",
+    "@nuxt/eslint-config",
+    "prettier"
+  ],
+  "plugins": ["vue"],
+  "rules": {
+    "vue/multi-word-component-names": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "caughtErrorsIgnorePattern": "^_"
+      }
+    ],
+    "max-lines": ["error", 500],
+    "max-lines-per-function": ["error", 40],
+    "max-params": ["error", 3]
+  }
+}
