@@ -5,6 +5,7 @@ import type { JWT } from '@auth/core/jwt'
 import { useRuntimeConfig } from '#imports'
 import { NuxtAuthHandler } from '#auth'
 import type { Provider } from '@auth/core/providers'
+import { useRequestEvent } from 'nuxt/app'
 
 const runtimeConfig = useRuntimeConfig()
 const defaultGitlabBaseUrl = 'https://gitlab.com'
@@ -21,7 +22,7 @@ const providers: Provider[] = [
   })
 ]
 
-if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+if (process.env.NUXT_PUBLIC_AUTH_MOCK === 'true') {
   providers.push(
     Credentials({
       authorize() {
@@ -38,7 +39,7 @@ if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
 
 export const authOptions: AuthConfig = {
   basePath: '/api/auth',
-  secret: runtimeConfig.authJs.secret,
+  secret: runtimeConfig.auth.secret,
   events: {
     async signOut(message) {
       const withToken = message as { token: JWT }
@@ -61,8 +62,10 @@ export const authOptions: AuthConfig = {
   },
   callbacks: {
     jwt: ({ token, account, user }) => {
+      const provider = account?.provider || token.provider
       // Initial sign in
       if (account && user) {
+        token.provider = account.provider
         token.accessToken = account.access_token
         token.refreshToken = account.refresh_token
         token.accessTokenExpired = (account.expires_at as number) * 1000
@@ -70,6 +73,8 @@ export const authOptions: AuthConfig = {
           Date.now() + (account.refresh_expires_in as number) * 1000
         token.user = user
       }
+
+      if (provider === 'credentials') return token
 
       // Return previous token if the access token has not expired yet
       if (Date.now() < (token.accessTokenExpired as number)) return token
@@ -150,6 +155,7 @@ declare module '@auth/core/types' {
 }
 declare module '@auth/core/jwt' {
   interface JWT {
+    provider: string
     accessToken?: string
   }
 }

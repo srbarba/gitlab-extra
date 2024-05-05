@@ -41,17 +41,17 @@
 
 <script setup lang="ts">
 import { useTheme } from 'vuetify'
-import { usePreferredDark } from '@vueuse/core'
+import { useDark } from '@vueuse/core'
 
 const theme = useTheme()
 theme.global.name.value = 'dark'
 
 onMounted(() => {
-  console.log(usePreferredDark().value)
-  theme.global.name.value = usePreferredDark().value ? 'dark' : 'light'
+  theme.global.name.value = useDark().value ? 'dark' : 'light'
 })
 
 function toggleTheme() {
+  useDark().value = !theme.global.current.value.dark
   theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
 }
 </script>
