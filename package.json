@@ -1,5 +1,6 @@
 {
   "name": "gitlab-extra",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -19,9 +20,12 @@
     "format": "prettier --ignore-unknown --check ."
   },
   "dependencies": {
+    "@auth/core": "^0.30.0",
+    "@hebilicious/authjs-nuxt": "^0.3.5",
     "@mdi/font": "^7.4.47",
     "@nuxt/kit": "^3.11.2",
     "@vuetify/loader-shared": "^2.0.3",
+    "@vueuse/core": "^10.9.0",
     "nuxt": "^3.11.2",
     "sass": "^1.75.0",
     "vite-plugin-vuetify": "^2.0.3",
