@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "NUXT_PUBLIC_AUTH_MOCK=true nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
@@ -68,5 +68,5 @@
     "**/*": "prettier --write --ignore-unknown",
     "*.{js,ts,cjs,mts,vue}": "eslint --ignore-path .gitignore --fix"
   },
-  "packageManager": "pnpm@9.0.6"
+  "packageManager": "pnpm@9.1.0"
 }

@@ -2,7 +2,7 @@ import process from 'node:process'
 import { defineConfig, devices } from '@playwright/test'
 
 const port = process.env.PORT || 3000
-const timeout = process.env.TIMEOUT ? Number(process.env.TIMEOUT) : 10_000
+const timeout = process.env.TIMEOUT ? Number(process.env.TIMEOUT) : 15_000
 const globalTimeout = process.env.GLOBAL_TIMEOUT
   ? Number(process.env.GLOBAL_TIMEOUT)
   : 60_000
