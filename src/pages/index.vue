@@ -1,7 +1,5 @@
 <template>
-  <v-container>
-    <HelloWorld />
-  </v-container>
+  <v-container>Index</v-container>
 </template>
 
 <script setup lang="ts">

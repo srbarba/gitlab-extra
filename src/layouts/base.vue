@@ -13,11 +13,7 @@
         <template #append>
           <slot name="app-bar-append-before"></slot>
           <slot name="app-bar-append">
-            <v-btn
-              icon="mdi-theme-light-dark"
-              :class="$slots['app-bar-append-after'] ? 'mr-2' : undefined"
-              @click="toggleTheme"
-            ></v-btn>
+            <TheThemeSwitch />
           </slot>
           <slot name="app-bar-append-after"></slot>
         </template>
@@ -38,20 +34,3 @@
     </slot>
   </v-app>
 </template>
-
-<script setup lang="ts">
-import { useTheme } from 'vuetify'
-import { useDark } from '@vueuse/core'
-
-const theme = useTheme()
-theme.global.name.value = 'dark'
-
-onMounted(() => {
-  theme.global.name.value = useDark().value ? 'dark' : 'light'
-})
-
-function toggleTheme() {
-  useDark().value = !theme.global.current.value.dark
-  theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
-}
-</script>
