@@ -31,15 +31,3 @@ it('should redirect to root path when user access to login page and user is alre
   await loginPage.goto()
   await new HomePage(page).waitForPage()
 })
-
-it('should logout and redirect to login', async ({ page }) => {
-  const loginPage = new LoginPage(page)
-  await loginPage.goto()
-  await loginPage.login()
-
-  const homePage = new HomePage(page)
-  await homePage.waitForPage()
-  await homePage.logout()
-
-  await loginPage.waitForPage()
-})

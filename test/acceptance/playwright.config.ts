@@ -33,8 +33,22 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
+      name: 'Auth',
+      testMatch: /Auth.spec.ts/,
       use: { ...devices['Desktop Chrome'] }
+    },
+    {
+      name: 'setup',
+      testMatch: /.*\.setup\.ts/
+    },
+    {
+      name: 'chromium',
+      testMatch: /(?<!Auth)\.spec\.ts$/,
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: '.playwright/.auth/user.json'
+      },
+      dependencies: ['setup']
     }
   ],
   /* Run your local dev server before starting the tests */
