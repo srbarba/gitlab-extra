@@ -5,7 +5,6 @@ import type { JWT } from '@auth/core/jwt'
 import { useRuntimeConfig } from '#imports'
 import { NuxtAuthHandler } from '#auth'
 import type { Provider } from '@auth/core/providers'
-import { useRequestEvent } from 'nuxt/app'
 
 const runtimeConfig = useRuntimeConfig()
 const defaultGitlabBaseUrl = 'https://gitlab.com'
