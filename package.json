@@ -67,6 +67,5 @@
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
     "*.{js,ts,cjs,mts,vue}": "eslint --ignore-path .gitignore --fix"
-  },
-  "packageManager": "pnpm@9.1.0"
+  }
 }
