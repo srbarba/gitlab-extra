@@ -61,7 +61,6 @@ export const authOptions: AuthConfig = {
   },
   callbacks: {
     jwt: ({ token, account, user }) => {
-      const provider = account?.provider || token.provider
       // Initial sign in
       if (account && user) {
         token.provider = account.provider
@@ -73,6 +72,7 @@ export const authOptions: AuthConfig = {
         token.user = user
       }
 
+      const provider = account?.provider || token.provider
       if (provider === 'credentials') return token
 
       // Return previous token if the access token has not expired yet
