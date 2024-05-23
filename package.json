@@ -14,7 +14,7 @@
     "test:ci": "vitest run --maxWorkers 1 --minWorkers 1 --passWithNoTests",
     "test:acceptance": "cd test/acceptance && NUXT_PUBLIC_AUTH_MOCK=true playwright test",
     "test:acceptance:codegen": "cd test/acceptance && NUXT_PUBLIC_AUTH_MOCK=true playwright codegen",
-    "test:acceptance:ci": "pnpm build && cd test/acceptance && NUXT_PUBLIC_AUTH_MOCK=true NODE_ENV=production playwright test",
+    "test:acceptance:ci": "mv .env.acceptance .env && pnpm build && cd test/acceptance && NUXT_PUBLIC_AUTH_MOCK=true NODE_ENV=production playwright test",
     "lint": "pnpm /^lint:.*$/",
     "lint:eslint": "eslint --ignore-path .gitignore --ext .js,.ts,.cjs,.mts,.vue .",
     "lint:ts": "nuxt typecheck",
