@@ -28,3 +28,4 @@ logs
 /test/**/*results.json
 /test/**/*results.xml
 /test/**/*.d.ts
+/test/acceptance/.playwright
