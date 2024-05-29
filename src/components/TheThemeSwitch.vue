@@ -13,7 +13,6 @@ import { useDark, useMounted } from '@vueuse/core'
 
 const isMounted = useMounted()
 const theme = useTheme()
-theme.global.name.value = 'dark'
 
 onMounted(() => {
   theme.global.name.value = useDark().value ? 'dark' : 'light'
