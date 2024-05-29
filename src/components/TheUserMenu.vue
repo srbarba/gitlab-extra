@@ -3,7 +3,7 @@
     <template #activator="{ props }">
       <v-btn v-bind="props" icon :disabled="!isMounted">
         <span class="d-sr-only">User menu</span>
-        <v-icon>mdi-account</v-icon>
+        <v-icon>$account</v-icon>
       </v-btn>
     </template>
     <v-card min-width="300">

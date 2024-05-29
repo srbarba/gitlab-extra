@@ -1,6 +1,6 @@
 <template>
   <v-btn
-    icon="mdi-theme-light-dark"
+    icon="$themeLightDark"
     :class="$slots['app-bar-append-after'] ? 'mr-2' : undefined"
     :disabled="!isMounted"
     @click="toggleTheme"
