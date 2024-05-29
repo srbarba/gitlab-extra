@@ -10,7 +10,7 @@ Integrate Vuetify with Nuxt projects.
 
 ```js
 export default defineNuxtConfig({
-  modules: ['./packages/nuxt-vuetify/src/module.ts'],
+  modules: ['./packages/nuxt-vuetify/index.ts'],
 })
 ````
 

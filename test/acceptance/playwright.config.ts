@@ -1,15 +1,18 @@
 import process from 'node:process'
 import { defineConfig, devices } from '@playwright/test'
 
-const port = process.env.PORT || 5173
-const timeout = process.env.TIMEOUT ? Number(process.env.TIMEOUT) : 5_000
+const port = process.env.PORT || 3000
+const timeout = process.env.TIMEOUT ? Number(process.env.TIMEOUT) : 15_000
+const globalTimeout = process.env.GLOBAL_TIMEOUT
+  ? Number(process.env.GLOBAL_TIMEOUT)
+  : 60_000
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  timeout: 5_000,
-  globalTimeout: timeout,
+  timeout,
+  globalTimeout,
   testDir: './specs',
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -30,16 +33,28 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
+      name: 'Auth',
+      testMatch: /Auth.spec.ts/,
       use: { ...devices['Desktop Chrome'] }
+    },
+    {
+      name: 'setup',
+      testMatch: /.*\.setup\.ts/
+    },
+    {
+      name: 'chromium',
+      testMatch: /(?<!Auth)\.spec\.ts$/,
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: '.playwright/.auth/user.json'
+      },
+      dependencies: ['setup']
     }
   ],
   /* Run your local dev server before starting the tests */
   webServer: {
     command:
-      process.env.NODE_ENV === 'production'
-        ? `pnpm app:build && PORT=${port} pnpm app:start`
-        : `PORT=${port} pnpm app:dev`,
+      process.env.NODE_ENV === 'production' ? `pnpm preview` : `pnpm dev`,
     url: `http://localhost:${port}`,
     reuseExistingServer: !process.env.CI
   }

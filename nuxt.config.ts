@@ -1,6 +1,9 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   srcDir: 'src/',
+  alias: {
+    cookie: 'cookie'
+  },
   devtools: { enabled: true },
-  modules: ['./packages/vuetify/src/module.ts']
+  ignorePrefix: '_',
+  modules: ['./packages/vuetify/index.ts', './packages/auth/index.ts']
 })

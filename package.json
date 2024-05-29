@@ -1,27 +1,32 @@
 {
   "name": "gitlab-extra",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "NUXT_PUBLIC_AUTH_MOCK=true nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "prepare": "husky",
-    "test": "vitest",
-    "test:ci": "vitest run --maxWorkers 1 --minWorkers 1",
-    "test:acceptance": "cd test/acceptance && pnpm test",
-    "test:acceptance:ci": "cd test/acceptance && pnpm test:ci",
+    "test": "vitest --passWithNoTests",
+    "test:ci": "vitest run --maxWorkers 1 --minWorkers 1 --passWithNoTests",
+    "test:acceptance": "cd test/acceptance && NUXT_PUBLIC_AUTH_MOCK=true playwright test",
+    "test:acceptance:codegen": "cd test/acceptance && NUXT_PUBLIC_AUTH_MOCK=true playwright codegen",
+    "test:acceptance:ci": "mv .env.acceptance .env && pnpm build && cd test/acceptance && NUXT_PUBLIC_AUTH_MOCK=true NODE_ENV=production playwright test",
     "lint": "pnpm /^lint:.*$/",
     "lint:eslint": "eslint --ignore-path .gitignore --ext .js,.ts,.cjs,.mts,.vue .",
     "lint:ts": "nuxt typecheck",
     "format": "prettier --ignore-unknown --check ."
   },
   "dependencies": {
-    "@mdi/font": "^7.4.47",
+    "@auth/core": "^0.30.0",
+    "@hebilicious/authjs-nuxt": "^0.3.5",
+    "@mdi/js": "^7.4.47",
     "@nuxt/kit": "^3.11.2",
     "@vuetify/loader-shared": "^2.0.3",
+    "@vueuse/core": "^10.9.0",
     "nuxt": "^3.11.2",
     "sass": "^1.75.0",
     "vite-plugin-vuetify": "^2.0.3",
@@ -32,6 +37,7 @@
   "devDependencies": {
     "@commitlint/config-conventional": "^19.2.2",
     "@nuxt/eslint-config": "^0.3.10",
+    "@playwright/test": "^1.43.1",
     "@testing-library/dom": "^10.1.0",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/user-event": "^14.5.2",
@@ -61,6 +67,5 @@
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown",
     "*.{js,ts,cjs,mts,vue}": "eslint --ignore-path .gitignore --fix"
-  },
-  "packageManager": "pnpm@9.0.6"
+  }
 }
